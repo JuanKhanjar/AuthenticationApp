@@ -1,0 +1,58 @@
+﻿@AuthenticationApp.API_HostAddress = http://localhost:5285
+@authUrl = https://localhost:7242
+
+
+GET {{AuthenticationApp.API_HostAddress}}/weatherforecast/
+Accept: application/json
+###
+
+### ------------------------------------------
+### 🔐 Register a new user
+### ------------------------------------------
+@authUrl = https://localhost:7242
+
+POST {{authUrl}}/api/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "fullName": "Juan Khanjar",
+  "email": "jan4ma@gmail.com",
+  "password": "Juan4ma123!G"
+}
+
+### ------------------------------------------
+### 🔑 Login to receive JWT Token
+### ------------------------------------------
+POST {{authUrl}}/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "jan4ma@gmail.com",
+  "password": "Juan4ma123!G"
+}
+
+### ------------------------------------------
+### 🔄 Refresh JWT Token (Not Implemented)
+### ------------------------------------------
+POST {{authUrl}}/api/auth/refresh?token=some_token&refreshToken=some_refresh_token
+Accept: application/json
+
+### ------------------------------------------
+### ✅ Confirm Email (Use token from email)
+### ------------------------------------------
+GET {{authUrl}}/api/auth/confirm-email?userId=REPLACE_USERID&token=REPLACE_TOKEN
+Accept: application/json
+
+### ------------------------------------------
+### ❤️ Health Check Endpoint
+### ------------------------------------------
+GET {{authUrl}}/health
+Accept: application/json
+
+### ------------------------------------------
+### 📊 Health Check UI
+### ------------------------------------------
+GET {{authUrl}}/health-ui
+Accept: text/html
